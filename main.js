@@ -237,3 +237,58 @@ printToDom('#pets', domString);
 };
 
 petBuilder(pets);
+
+const manageButtonClick = (event) => {
+  const buttonId = event.target.id;
+
+  if (buttonId === "all") {
+    document.querySelector("#all").style.backgroundColor = "LIGHT BLUE";
+  }
+  
+  if (buttonId === "all") {
+    document.querySelector("#cat").style.backgroundColor = "PINK";
+  }
+  if (buttonId === "all") {
+    document.querySelector("#dog").style.backgroundColor = "BEIGE";
+  }
+  if (buttonId === "all") {
+    document.querySelector("#dino").style.backgroundColor = "OPAGUE";
+  }
+  const selectedPets = [];
+  for (let i = 0; i < pets.length; i++) {
+    if (pets[i].type === buttonId) {
+      selectedPets.push(pets[i]);
+    }
+  }
+
+  if (buttonId === "all") {
+    petBuilder(pets);
+  } else {
+    petBuilder(selectedPets)
+  }
+};
+
+const deletePets = (event) => {
+  const targetType = event.target.type;
+  const targetId = event.target.id;
+  if (targetType === "button") {
+    pets.splice(targetId, 1);
+  }
+
+  petBuilder(pets);
+};
+
+const buttonEvents = () => {
+  document.querySelector("#all").addEventListener("click", manageButtonClick);
+  document.querySelector("#cat").addEventListener("click", manageButtonClick);
+  document.querySelector("#dog").addEventListener("click", manageButtonClick);
+  document.querySelector("#dino").addEventListener("click", manageButtonClick);
+  document.querySelector("#pets").addEventListener("click", deletePets);
+};
+
+const init = () => {
+  buttonEvents();
+  petBuilder(pets);
+};
+
+init();
